@@ -1,10 +1,10 @@
-"'use client'"
+"use client"
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
 import { SignInButton, useUser } from '@clerk/nextjs'
-import { motion } from "motion/react"
+import { motion } from "framer-motion";
 
 const menuOptions=[
     {

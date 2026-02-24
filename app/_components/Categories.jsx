@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
-import {motion} from "motion/react"
+import { motion } from "framer-motion";
 
 
 function Categories() {
