@@ -34,11 +34,11 @@ const SideBarOptions=[
     icon:Compass,
     path:'/workspace/explore'
   },
-  {
-    title:'AI Tools',
-    icon:PencilRulerIcon,
-    path:'/workspace/ai-tools'
-  },
+  // {
+  //   title:'Quizzes',
+  //   icon:PencilRulerIcon,
+  //   path:'/workspace/quizzes/[courseId]'
+  // },
 
   {
     title:'Billing',
@@ -49,7 +49,13 @@ const SideBarOptions=[
     title:'Profile',
     icon:UserCircle2Icon,
     path:'/workspace/profile'
+  },
+  {
+    title:'Contact Support',
+    icon:Link,
+    path:'/workspace/contact'
   }
+  
 ]
  
 function AppSidebar() {

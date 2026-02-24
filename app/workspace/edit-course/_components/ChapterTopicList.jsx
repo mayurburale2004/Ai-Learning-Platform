@@ -1,8 +1,18 @@
 import { Gift } from 'lucide-react';
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 
 function ChapterTopicList({course}) {
+  const router = useRouter();
     const courseLayout=course?.courseJson?.course;
+    const [isCompleted, setIsCompleted] = useState(false);
+    const courseId=course?.id;
+    useEffect(() => {
+    if (courseLayout) {
+      setIsCompleted(true); // ✅ runs only when courseLayout changes
+    }
+  }, [courseLayout]);
+
   return (
     <div>
       <h2 className='font-bold text-3xl mt-10'>Chapters & Topics</h2>
@@ -14,12 +24,22 @@ function ChapterTopicList({course}) {
         <div className='p-4 border shadow rounded-xl bg-primary text-white'>
         <h2 className='text-center '>Chapter {index + 1}</h2>
         <h2 className='font-bold text-lg text-center'>{chapter.chapterName}</h2>
-        <h2 className='text-xs flex justify-between gap-16'>
+       { /*  <h2 className='text-xs flex justify-between gap-16'>
           <span>Duration: {chapter?.duration}</span>
           <span>No. Of Chapters: {chapter?.topics?.length}</span>
-         </h2>
+         </h2> */}
+         
+
          </div>
+         {/* <div>
+          {isCompleted && (
+               <button onClick={() => router.push(`/workspace/quizzes/${courseId}`)}
+                className="bg-green-600 text-white px-4 py-2 rounded-lg ml-3">Take Quiz</button>)}
+         </div> */}
+         
          <div>
+
+          
       {chapter?.topics.map((topic, index) => (
         <div className='flex flex-col items-center' key={index}>
           <div className='h-10 bg-gray-300 w-1'></div>

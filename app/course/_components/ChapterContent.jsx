@@ -47,7 +47,7 @@ function ChapterContent({courseInfo, refreshData}) {
       <div className='flex justify-between items-center'>
       <h2 className='font-bold text-2xl'>{selectedChapterIndex + 1}. {courseContent?.[selectedChapterIndex]?.courseData?.chapterName}</h2>
       {!completedChapter?.includes(selectedChapterIndex)?<Button onClick={()=>markChapterCompleted()}
-      disables={loading}
+      disabled={loading}
         >{loading?<Loader2Icon className='animate-spin'/> :<CheckCircle/>}
         Mark as Completed</Button>:
       <Button variant="outline" onClick={markInCompleteChapter}

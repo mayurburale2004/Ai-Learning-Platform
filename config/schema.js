@@ -1,4 +1,4 @@
-import { boolean, integer, json, pgTable, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, json, pgTable, varchar,text, uuid, jsonb, timestamp } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -29,3 +29,26 @@ export const enrollCourseTable=pgTable('enrollCourse',{
   userEmail: varchar('userEmail').references(()=>usersTable.email).notNull(),
   completedChapters: json()
 })
+
+// config/schema.js
+
+// Quiz questions table
+export const quizzesTable = pgTable("quizzes", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  courseId: text("course_id").notNull(),
+  contentText: text("content_text"),
+  questions: jsonb("questions"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Quiz results table
+export const quizResultsTable = pgTable("quiz_results", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  quizId: uuid("quiz_id").notNull().references(() => quizzesTable.id),
+  userId: text("user_id").notNull(),
+  answers: jsonb("answers"),
+  score: integer("score"),
+  total: integer("total"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+

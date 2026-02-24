@@ -66,11 +66,19 @@ function CourseInfo({course, viewCourse}) {
             {loading ? <Loader2Icon className='animate-spin'/> : <Settings/> } Generate Content</Button>
             :<Link href={'/course/'+course?.cid}> <Button><PlayCircle/> Continue Learning </Button> </Link>}
       </div>
-      <Image src={course?.bannerImageUrl} alt={'banner Image'}
-      width={400}
-      height={400}
-      className='w-full mt-5 md:mt-0 object-cover max-w-lg h-[240px] rounded-2xl'
-      />
+      {course?.bannerImageUrl ? (
+        <Image
+          src={course.bannerImageUrl}
+          alt="banner Image"
+          width={400}
+          height={400}
+          className="w-full mt-5 md:mt-0 object-cover max-w-lg h-[240px] rounded-2xl"
+        />
+      ) : (
+        <div className="w-full mt-5 md:mt-0 max-w-lg h-[240px] rounded-2xl bg-gray-200 flex items-center justify-center text-gray-500">
+          Image Loading...
+        </div>
+      )}
     </div>
   )
 }
