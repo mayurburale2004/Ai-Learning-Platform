@@ -51,7 +51,7 @@ export async function POST(req) {
   const config = {
     responseMimeType: 'text/plain',
   };
-  const model = 'gemini-2.0-flash';
+  const model = 'gemini-1.5-flash';   //gemini-2.0-flash
   const contents = [
     {
       role: 'user',
