@@ -19,7 +19,7 @@ function Header() {
    const [open,setOpen]=useState(false);
    const menuRef = useRef(null);
 
-   // Close when clicking outside
+   // Close menu when clicking outside
    useEffect(() => {
      function handleClickOutside(event){
        if(menuRef.current && !menuRef.current.contains(event.target)){
@@ -69,19 +69,17 @@ function Header() {
         }
 
         {/* Mobile Menu Icon */}
-        {!open && (
-          <div className="md:hidden text-black">
-            <Menu
-              size={28}
-              className="cursor-pointer"
-              onClick={()=>setOpen(true)}
-            />
-          </div>
-        )}
+        <div className="md:hidden text-black">
+          {open ?
+            <X className="cursor-pointer" onClick={()=>setOpen(false)} />
+            :
+            <Menu className="cursor-pointer" onClick={()=>setOpen(true)} />
+          }
+        </div>
 
       </div>
 
-      {/* Overlay */}
+      {/* Dark Overlay */}
       {open && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
@@ -89,40 +87,28 @@ function Header() {
         ></div>
       )}
 
-      {/* Mobile Glass Menu */}
+      {/* Glassmorphism Mobile Menu */}
       {open && (
-  <motion.div
-    ref={menuRef}
-    initial={{ opacity: 0, y: -20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.25 }}
-    className='fixed top-20 left-1/2 -translate-x-1/2 w-[90%]
-    bg-white/25 backdrop-blur-xl border border-white/30
-    shadow-2xl rounded-xl
-    flex flex-row justify-around items-center
-    py-4 px-6 md:hidden z-50 relative'>
+        <motion.div
+          ref={menuRef}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className='fixed top-20 left-1/2 -translate-x-1/2 w-[90%]
+          bg-white/20 backdrop-blur-lg border border-white/30
+          shadow-2xl rounded-2xl flex flex-col items-center
+          gap-6 py-6 md:hidden z-50'>
 
-    {/* Cross Icon */}
-    <X
-      size={24}
-      className="absolute top-2 right-3 cursor-pointer text-black"
-      onClick={()=>setOpen(false)}
-    />
+          {menuOptions.map((menu,index)=>(
+            <Link key={index} href={menu.path} onClick={()=>setOpen(false)}>
+              <h2 className='text-lg font-semibold text-black hover:scale-105 transition-all'>
+                {menu.name}
+              </h2>
+            </Link>
+          ))}
 
-    {menuOptions.map((menu,index)=>(
-      <Link
-        key={index}
-        href={menu.path}
-        onClick={()=>setOpen(false)}
-      >
-        <h2 className='text-lg font-semibold text-black hover:scale-105 transition-all'>
-          {menu.name}
-        </h2>
-      </Link>
-    ))}
-
-  </motion.div>
-)}
+        </motion.div>
+      )}
 
     </div>
   )
