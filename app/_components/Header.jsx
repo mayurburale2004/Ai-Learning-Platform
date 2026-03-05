@@ -39,7 +39,7 @@ function Header() {
       {/* Logo */}
       <div className='flex items-center gap-2'>
         <Image src={'/online-education.png'} alt='logo' width={30} height={30}/>
-        <h2 className='font-bold text-xl md:text-2xl text-white'>
+        <h2 className='font-bold text-xl md:text-2xl text-black'>
           Online Learning Platform
         </h2>
       </div>
@@ -69,7 +69,7 @@ function Header() {
         }
 
         {/* Mobile Menu Icon */}
-        <div className="md:hidden text-white">
+        <div className="md:hidden text-black">
           {open ?
             <X className="cursor-pointer" onClick={()=>setOpen(false)} />
             :
