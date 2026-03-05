@@ -19,7 +19,7 @@ function Header() {
    const [open,setOpen]=useState(false);
 
   return (
-    <div className='bg-gradient-to-r to-blue-500 from-purple-500 flex items-center justify-between px-6 py-4'>
+    <div className='bg-gradient-to-r to-blue-500 from-purple-500 flex items-center justify-between px-6 py-4 relative'>
 
       {/* Logo */}
       <motion.div
@@ -46,7 +46,13 @@ function Header() {
             </h2>
           </Link>
         ))}
+      </motion.div>
 
+
+      {/* Right Side (Button + Mobile Menu Icon) */}
+      <div className="flex items-center gap-4">
+
+        {/* Get Started Button */}
         {!user ?
           <SignInButton mode='modal'>
             <Button>Get Started</Button>
@@ -56,16 +62,16 @@ function Header() {
             <Button className="cursor-pointer">Get Started</Button>
           </Link>
         }
-      </motion.div>
 
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden">
+          {open ?
+            <X className="cursor-pointer" onClick={()=>setOpen(false)} />
+            :
+            <Menu className="cursor-pointer" onClick={()=>setOpen(true)} />
+          }
+        </div>
 
-      {/* Mobile Menu Icon */}
-      <div className="md:hidden">
-        {open ?
-          <X className="cursor-pointer" onClick={()=>setOpen(false)} />
-          :
-          <Menu className="cursor-pointer" onClick={()=>setOpen(true)} />
-        }
       </div>
 
 
@@ -78,16 +84,6 @@ function Header() {
               <h2 className='text-lg font-semibold'>{menu.name}</h2>
             </Link>
           ))}
-
-          {!user ?
-            <SignInButton mode='modal'>
-              <Button>Get Started</Button>
-            </SignInButton>
-            :
-            <Link href={'/workspace'}>
-              <Button>Get Started</Button>
-            </Link>
-          }
 
         </div>
       )}
