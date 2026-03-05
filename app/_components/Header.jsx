@@ -19,7 +19,7 @@ function Header() {
    const [open,setOpen]=useState(false);
    const menuRef = useRef(null);
 
-   // Close menu when clicking outside
+   // Close when clicking outside
    useEffect(() => {
      function handleClickOutside(event){
        if(menuRef.current && !menuRef.current.contains(event.target)){
@@ -45,7 +45,7 @@ function Header() {
       </div>
 
       {/* Desktop Menu */}
-      <div className='hidden md:flex gap-8 items-center font-bold text-white'>
+      <div className='hidden md:flex gap-8 items-center font-bold text-black'>
         {menuOptions.map((menu,index)=>(
           <Link key={index} href={menu.path}>
             <h2 className='text-lg hover:scale-105 transition-all'>
@@ -69,17 +69,19 @@ function Header() {
         }
 
         {/* Mobile Menu Icon */}
-        <div className="md:hidden text-black">
-          {open ?
-            <X className="cursor-pointer" onClick={()=>setOpen(false)} />
-            :
-            <Menu className="cursor-pointer" onClick={()=>setOpen(true)} />
-          }
-        </div>
+        {!open && (
+          <div className="md:hidden text-black">
+            <Menu
+              size={28}
+              className="cursor-pointer"
+              onClick={()=>setOpen(true)}
+            />
+          </div>
+        )}
 
       </div>
 
-      {/* Dark Overlay */}
+      {/* Overlay */}
       {open && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
@@ -87,21 +89,34 @@ function Header() {
         ></div>
       )}
 
-      {/* Glassmorphism Mobile Menu */}
+      {/* Mobile Glass Menu */}
       {open && (
         <motion.div
           ref={menuRef}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: -20, scale:0.95 }}
+          animate={{ opacity: 1, y: 0, scale:1 }}
+          transition={{ duration: 0.25 }}
           className='fixed top-20 left-1/2 -translate-x-1/2 w-[90%]
-          bg-white/20 backdrop-blur-lg border border-white/30
+          bg-white/25 backdrop-blur-xl border border-white/30
           shadow-2xl rounded-2xl flex flex-col items-center
-          gap-6 py-6 md:hidden z-50'>
+          gap-4 py-8 px-4 md:hidden z-50 relative'>
+
+          {/* Cross Icon inside menu */}
+          <X
+            size={28}
+            className="absolute top-4 right-4 cursor-pointer text-black"
+            onClick={()=>setOpen(false)}
+          />
 
           {menuOptions.map((menu,index)=>(
-            <Link key={index} href={menu.path} onClick={()=>setOpen(false)}>
-              <h2 className='text-lg font-semibold text-black hover:scale-105 transition-all'>
+            <Link
+              key={index}
+              href={menu.path}
+              onClick={()=>setOpen(false)}
+              className='w-full text-center py-2 rounded-lg
+              hover:bg-white/30 transition-all'
+            >
+              <h2 className='text-lg font-semibold text-black'>
                 {menu.name}
               </h2>
             </Link>
