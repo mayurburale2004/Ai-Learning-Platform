@@ -74,19 +74,28 @@ function Header() {
 
       </div>
 
+        {/* Mobile Menu */}
+        {open && (
+  <motion.div
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.3 }}
+    className='absolute top-16 left-1/2 -translate-x-1/2 w-[90%] 
+    bg-gradient-to-r from-purple-500 to-blue-500
+    shadow-xl rounded-2xl flex flex-col items-center 
+    gap-6 py-6 md:hidden backdrop-blur-lg'>
 
-      {/* Mobile Menu */}
-      {open && (
-        <div className='absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center gap-6 py-6 md:hidden'>
+    {menuOptions.map((menu,index)=>(
+      <Link key={index} href={menu.path} onClick={()=>setOpen(false)}>
+        <h2 className='text-lg font-semibold text-white hover:scale-105 transition-all'>
+          {menu.name}
+        </h2>
+      </Link>
+    ))}
 
-          {menuOptions.map((menu,index)=>(
-            <Link key={index} href={menu.path} onClick={()=>setOpen(false)}>
-              <h2 className='text-lg font-semibold'>{menu.name}</h2>
-            </Link>
-          ))}
-
-        </div>
-      )}
+  </motion.div>
+)}
+      
 
     </div>
   )
