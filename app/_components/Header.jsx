@@ -101,7 +101,7 @@ function Header() {
 
           {menuOptions.map((menu,index)=>(
             <Link key={index} href={menu.path} onClick={()=>setOpen(false)}>
-              <h2 className='text-lg font-semibold text-white hover:scale-105 transition-all'>
+              <h2 className='text-lg font-semibold text-black hover:scale-105 transition-all'>
                 {menu.name}
               </h2>
             </Link>
