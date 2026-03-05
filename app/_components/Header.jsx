@@ -91,39 +91,38 @@ function Header() {
 
       {/* Mobile Glass Menu */}
       {open && (
-        <motion.div
-          ref={menuRef}
-          initial={{ opacity: 0, y: -20, scale:0.95 }}
-          animate={{ opacity: 1, y: 0, scale:1 }}
-          transition={{ duration: 0.25 }}
-          className='fixed top-20 left-1/2 -translate-x-1/2 w-[90%]
-          bg-white/25 backdrop-blur-xl border border-white/30
-          shadow-2xl rounded-2xl flex flex-col items-center
-          gap-4 py-8 px-4 md:hidden z-50 relative'>
+  <motion.div
+    ref={menuRef}
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.25 }}
+    className='fixed top-20 left-1/2 -translate-x-1/2 w-[90%]
+    bg-white/25 backdrop-blur-xl border border-white/30
+    shadow-2xl rounded-xl
+    flex flex-row justify-around items-center
+    py-4 px-6 md:hidden z-50 relative'>
 
-          {/* Cross Icon inside menu */}
-          <X
-            size={28}
-            className="absolute top-4 right-4 cursor-pointer text-black"
-            onClick={()=>setOpen(false)}
-          />
+    {/* Cross Icon */}
+    <X
+      size={24}
+      className="absolute top-2 right-3 cursor-pointer text-black"
+      onClick={()=>setOpen(false)}
+    />
 
-          {menuOptions.map((menu,index)=>(
-            <Link
-              key={index}
-              href={menu.path}
-              onClick={()=>setOpen(false)}
-              className='w-full text-center py-2 rounded-lg
-              hover:bg-white/30 transition-all'
-            >
-              <h2 className='text-lg font-semibold text-black'>
-                {menu.name}
-              </h2>
-            </Link>
-          ))}
+    {menuOptions.map((menu,index)=>(
+      <Link
+        key={index}
+        href={menu.path}
+        onClick={()=>setOpen(false)}
+      >
+        <h2 className='text-lg font-semibold text-black hover:scale-105 transition-all'>
+          {menu.name}
+        </h2>
+      </Link>
+    ))}
 
-        </motion.div>
-      )}
+  </motion.div>
+)}
 
     </div>
   )
