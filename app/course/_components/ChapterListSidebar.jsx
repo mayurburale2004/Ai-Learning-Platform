@@ -27,7 +27,7 @@ function ChapterListSidebar({courseInfo}) {
            {index + 1}. {chapter?.courseData?.chapterName}</AccordionTrigger>
           <AccordionContent asChild>
             <div >
-              {chapter?.courseData?.topics.map((topic, index_)=>(
+              {chapter?.courseData?.topics?.map((topic, index_)=>(
                 <h2 key={index_}
                  className={`p-3 my-1 rounded-lg
                   ${completedChapter.includes(index) ? 'bg-green-100 text-green-800' : 'bg-white'}`}>{completedChapter.includes(index)}{topic?.topic}</h2>

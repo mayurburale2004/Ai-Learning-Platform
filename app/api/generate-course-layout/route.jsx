@@ -51,7 +51,7 @@ export async function POST(req) {
   const config = {
     responseMimeType: 'text/plain',
   };
-  const model = 'gemini-2.0-flash';   
+  const model = 'gemini-2.5-flash';   
   const contents = [
     {
       role: 'user',
@@ -69,7 +69,7 @@ export async function POST(req) {
     const result=await db.select().from(coursesTable)
     .where(eq(coursesTable.userEmail,user?.primaryEmailAddress.emailAddress));
 
-    if(result?.length>=1)
+    if(result?.length>=100)
     {
       return NextResponse.json({'resp':'limit exceed'})
     }
@@ -101,24 +101,64 @@ export async function POST(req) {
 
     return NextResponse.json({ courseId: courseId });
   }
+//   const GenerateImage = async (imagePrompt) => {
+//   try {
+//     const result = await axios.post(
+// 'https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5',
+//       { inputs: imagePrompt },
+//       {
+//         headers: { Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}` },
+//         responseType: 'arraybuffer'
+//       }
+//     );
+//     const base64 = Buffer.from(result.data).toString('base64');
+//     return `data:image/jpeg;base64,${base64}`;
+//   } catch (err) {
+//     console.error('Image generation failed:', err.message);
+//     return '/Physics.png'; // fallback image
+//   }
+// }
+// const GenerateImage = async (imagePrompt) => {
+//   return '/Physics.png';
+// }
 
+// const GenerateImage=async(imagePrompt)=>{
+//   const BASE_URL='https://aigurulab.tech';
+// const result = await axios.post(BASE_URL+'/api/generate-image',
+//         {
+//             width: 1024,
+//             height: 1024,
+//             input: imagePrompt,
+//             model: 'flux',//'flux'
+//             aspectRatio:"16:9"//Applicable to Flux model only
+//         },
+//         {
+//             headers: {
+//                 'x-api-key': process?.env?.AI_GURU_LAB_API, // Your API Key
+//                 'Content-Type': 'application/json', // Content Type
+//             },
+//         })
+//          console.log(result.data.image) //Output Result: Base 64 Image
+//          return result.data.image;
+// }
+// ✅ Function defined FIRST
+// const GenerateImage = (category) => {
+//   const banners = {
+//     'coding': '/coding.png',
+//     'programming': '/coding.png',
+//     'science': '/science.png',
+//     'business': '/business.png',
+//     'math': '/math.png',
+//     'design': '/Digital.png',
+//     'figma': '/Figma.png',
+//     'health': '/health.png',
+//     'physics': '/Physics.png',
+//     'chemistry': '/Chemistry.png',
+//     'biology': '/Chemistry.png',
+//   };
+//   return banners[category?.toLowerCase()] ?? '/banner.png';
+// }
 
-const GenerateImage=async(imagePrompt)=>{
-  const BASE_URL='https://aigurulab.tech';
-const result = await axios.post(BASE_URL+'/api/generate-image',
-        {
-            width: 1024,
-            height: 1024,
-            input: imagePrompt,
-            model: 'flux',//'flux'
-            aspectRatio:"16:9"//Applicable to Flux model only
-        },
-        {
-            headers: {
-                'x-api-key': process?.env?.AI_GURU_LAB_API, // Your API Key
-                'Content-Type': 'application/json', // Content Type
-            },
-        })
-         console.log(result.data.image) //Output Result: Base 64 Image
-         return result.data.image;
+const GenerateImage = async (imagePrompt) => {
+  return '/banner.png';
 }
