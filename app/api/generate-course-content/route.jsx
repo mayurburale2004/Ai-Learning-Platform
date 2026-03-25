@@ -26,7 +26,7 @@ export async function POST(req) {
   for (const chapter of courseJson?.chapters) {
     try {
       const config = { responseMimeType: 'text/plain' };
-      const model = 'gemini-2.5-flash';
+      const model = 'gemini-2.5-flash-lite';
       const contents = [
         {
           role: 'user',

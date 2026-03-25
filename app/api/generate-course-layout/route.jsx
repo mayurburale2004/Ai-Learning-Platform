@@ -51,7 +51,7 @@ export async function POST(req) {
   const config = {
     responseMimeType: 'text/plain',
   };
-  const model = 'gemini-2.5-flash';   
+  const model = 'gemini-2.5-flash-lite';   
   const contents = [
     {
       role: 'user',
@@ -160,5 +160,5 @@ export async function POST(req) {
 // }
 
 const GenerateImage = async (imagePrompt) => {
-  return '/banner.png';
+  return '/video.png';
 }
