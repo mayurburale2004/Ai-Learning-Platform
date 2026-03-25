@@ -160,5 +160,5 @@ export async function POST(req) {
 // }
 
 const GenerateImage = async (imagePrompt) => {
-  return '/video.png';
+  return '/banner.png';
 }
