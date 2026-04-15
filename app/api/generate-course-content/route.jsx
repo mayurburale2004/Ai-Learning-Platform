@@ -47,7 +47,7 @@ export async function POST(req) {
         courseData: JSONResp
       });
 
-      // ✅ Wait 5 seconds between chapters to avoid rate limit
+ 
       await new Promise(res => setTimeout(res, 5000));
 
     } catch (err) {
